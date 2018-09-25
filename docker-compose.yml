@@ -1,0 +1,55 @@
+version: "2.0"
+services:
+  playlistsuggestion-ws:
+    build: ./playlistsuggestion-ws
+    #environment:
+    #  - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/db_star_wars
+    #container_name: playlistsuggestion-ws
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - activemq
+      - redis
+    links:
+      - activemq
+      - redis
+    networks:
+      - playlistsuggestion-net
+  playlistsuggestion-worker:
+    build: ./playlistsuggestion-worker
+    #environment:
+    #  - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/db_star_wars
+    #container_name: playlistsuggestion-worker
+    expose:
+      - 8090
+    ports:
+      - 8090:8090
+    depends_on:
+      - activemq
+      - redis
+    links:
+      - activemq
+      - redis
+    networks:
+      - playlistsuggestion-net
+  activemq:
+    image: webcenter/activemq:latest
+    container_name: playlistsuggestion-activemq
+    ports:
+      - 8161:8161
+      - 61616:61616
+      - 61613:61613
+    networks:
+      - playlistsuggestion-net      
+  redis:
+    image: redis:latest
+    container_name: playlistsuggestion-redis
+    ports:
+      - 6379:6379 
+    networks:
+      - playlistsuggestion-net                      
+networks:
+  playlistsuggestion-net:
+    driver: bridge

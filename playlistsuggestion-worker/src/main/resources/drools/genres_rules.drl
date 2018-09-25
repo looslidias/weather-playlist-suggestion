@@ -1,0 +1,50 @@
+import java.util.List;
+import java.util.Date;
+import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.TemperatureDTO;
+import com.google.common.collect.Lists;
+
+// Global variables
+dialect "java"
+global List<String> genres;
+
+// Rules
+rule "Above 30 degrees (Celcius) - Party"
+
+   when
+      $weatherDTO : WeatherDTO()
+      TemperatureDTO(temperature > 30) from $weatherDTO.getCelcius()
+
+   then
+      genres.add("party");
+end
+
+rule "Between 15 and 30 degrees (Celcius) - Pop"
+
+   when
+      $weatherDTO : WeatherDTO()
+      TemperatureDTO(temperature > 15 && temperature <= 30 ) from $weatherDTO.getCelcius()
+
+   then
+      genres.add("pop");
+end
+
+rule "Between 10 and 14 degrees (Celcius) - Rock"
+
+   when
+      $weatherDTO : WeatherDTO()
+      TemperatureDTO(temperature > 10 && temperature <= 14 ) from $weatherDTO.getCelcius()
+
+   then
+      genres.add("rock");
+end
+
+rule "Below 10 (Celcius) - Classical"
+
+   when
+      $weatherDTO : WeatherDTO()
+      TemperatureDTO(temperature <= 10 ) from $weatherDTO.getCelcius()
+
+   then
+      genres.add("classical");
+end
