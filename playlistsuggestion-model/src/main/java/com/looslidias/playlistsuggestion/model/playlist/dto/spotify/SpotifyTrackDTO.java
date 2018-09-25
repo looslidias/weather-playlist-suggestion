@@ -1,9 +1,10 @@
-package com.looslidias.playlistsuggestion.model.queue;
+package com.looslidias.playlistsuggestion.model.music.dto.spotify;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18
@@ -11,9 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class PlaylistLatLongSuggestionQueueDTO {
-    private Double lat;
-    private Double lon;
-    private String callback;
+public class SpotifyTrackDTO {
+    private List<SpotifyTrackItemDTO> items;
 }

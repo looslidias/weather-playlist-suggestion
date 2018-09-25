@@ -1,7 +1,6 @@
-package com.looslidias.playlistsuggestion.model.queue;
+package com.looslidias.playlistsuggestion.model.music.dto.spotify;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class PlaylistCitySuggestionQueueDTO {
-    private String city;
-    private String countryCode;
-    private String callback;
+public class SpotifyResponseDTO {
+    private SpotifyTrackDTO tracks;
 }

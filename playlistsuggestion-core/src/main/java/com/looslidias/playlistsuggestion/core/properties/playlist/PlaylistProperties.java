@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18
  */
-@ConfigurationProperties(prefix = "music")
+@ConfigurationProperties(prefix = "suggestion")
 @NoArgsConstructor
 @Data
 @Component

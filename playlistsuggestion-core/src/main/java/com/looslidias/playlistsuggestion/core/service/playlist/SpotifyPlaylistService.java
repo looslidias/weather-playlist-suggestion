@@ -1,10 +1,10 @@
-package com.looslidias.playlistsuggestion.core.service.music;
+package com.looslidias.playlistsuggestion.core.service.playlist;
 
 import com.google.common.base.Preconditions;
 import com.looslidias.playlistsuggestion.core.properties.music.MusicProperties;
 import com.looslidias.playlistsuggestion.core.utils.MusicUtils;
-import com.looslidias.playlistsuggestion.model.music.MusicDTO;
-import com.looslidias.playlistsuggestion.model.music.spotify.SpotifyResponseDTO;
+import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
+import com.looslidias.playlistsuggestion.model.playlist.dto.spotify.SpotifyResponseDTO;
 import org.apache.commons.text.StrSubstitutor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18
  */
 @Service
-public class SpotifyMusicService implements MusicService {
+public class SpotifyMusicService implements PlaylistService {
 
     private MusicProperties musicProperties;
     private RestTemplate restTemplate;
@@ -31,9 +31,9 @@ public class SpotifyMusicService implements MusicService {
         this.restTemplate = new RestTemplate();
     }
 
-    @Cacheable(value = "music-tracks", key = "#genre")
+    @Cacheable(value = "suggestion-tracks", key = "#genre")
     @Override
-    public MusicDTO searchGenreTracks(String genre) {
+    public PlaylistDTO searchGenreTracks(String genre) {
         Preconditions.checkArgument(genre != null, "Genre must be specified");
 
         String url = buildGenreRequestUrl(genre);

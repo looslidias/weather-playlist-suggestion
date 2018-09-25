@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.music.spotify;
+package com.looslidias.playlistsuggestion.model.music.dto.spotify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,11 +1,11 @@
 package com.looslidias.playlistsuggestion.model.playlist;
 
-import com.looslidias.playlistsuggestion.model.music.MusicDTO;
+import com.looslidias.playlistsuggestion.model.music.dto.MusicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
 
 import java.io.Serializable;
 import java.util.List;

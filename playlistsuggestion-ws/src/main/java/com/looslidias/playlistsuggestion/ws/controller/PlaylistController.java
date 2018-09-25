@@ -1,11 +1,10 @@
 package com.looslidias.playlistsuggestion.ws.controller;
 
-import com.looslidias.playlistsuggestion.core.service.music.MusicService;
-import com.looslidias.playlistsuggestion.model.music.MusicDTO;
-import com.looslidias.playlistsuggestion.ws.controller.mapping.MusicURLMapping;
+import com.looslidias.playlistsuggestion.core.service.playlist.PlaylistService;
+import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
+import com.looslidias.playlistsuggestion.ws.controller.mapping.PlaylistURLMapping;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class MusicController {
 
     @Autowired
-    private MusicService musicService;
+    private PlaylistService playlistService;
 
-    @RequestMapping(value = MusicURLMapping.GENRE_TRACKS_ENDPOINT, method = RequestMethod.GET)
+    @RequestMapping(value = PlaylistURLMapping.GENRE_TRACKS_ENDPOINT, method = RequestMethod.GET)
     public ResponseEntity getGenreTracks(@PathVariable("genre") String genre) {
         try {
-            MusicDTO response = musicService.searchGenreTracks(genre);
+            PlaylistDTO response = playlistService.searchGenreTracks(genre);
             log.info("Successfully processed Genre Tracks request. Genre: {}", genre);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
         } catch (IllegalArgumentException e) {

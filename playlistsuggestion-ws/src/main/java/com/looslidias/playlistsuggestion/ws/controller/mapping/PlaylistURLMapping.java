@@ -8,6 +8,6 @@ public final class MusicURLMapping {
     private MusicURLMapping(){}
 
     private static final String VERSION = "/1.0";
-    private static final String ENDPOINT = "/music" + VERSION;
+    private static final String ENDPOINT = "/suggestion" + VERSION;
     public static final String GENRE_TRACKS_ENDPOINT = ENDPOINT + "/genre/{genre}";
 }

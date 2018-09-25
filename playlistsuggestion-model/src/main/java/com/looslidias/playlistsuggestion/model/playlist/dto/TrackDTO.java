@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.music;
+package com.looslidias.playlistsuggestion.model.music.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

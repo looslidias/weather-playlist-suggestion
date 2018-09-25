@@ -1,8 +1,8 @@
-package com.looslidias.playlistsuggestion.core.service.playlist.genre;
+package com.looslidias.playlistsuggestion.core.service.suggestion.genre;
 
 import com.google.common.collect.Lists;
 import com.looslidias.playlistsuggestion.core.properties.suggestion.SuggestionProperties;
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;

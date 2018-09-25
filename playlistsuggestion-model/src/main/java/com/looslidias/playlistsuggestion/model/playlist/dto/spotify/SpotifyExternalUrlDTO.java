@@ -1,5 +1,6 @@
-package com.looslidias.playlistsuggestion.model.music.spotify;
+package com.looslidias.playlistsuggestion.model.music.dto.spotify;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SpotifyResponseDTO {
-    private SpotifyTrackDTO tracks;
+public class SpotifyExternalUrlDTO {
+    @JsonProperty("spotify")
+    private String url;
 }
