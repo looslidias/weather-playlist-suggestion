@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.wheater.openweather;
+package com.looslidias.playlistsuggestion.model.wheater.dto.openweather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.looslidias.playlistsuggestion.core.service.weather;
 
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
 
 /**
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18

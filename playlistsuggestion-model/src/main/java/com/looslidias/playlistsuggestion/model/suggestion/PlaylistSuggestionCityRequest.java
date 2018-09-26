@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.playlist;
+package com.looslidias.playlistsuggestion.model.suggestion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class PlaylistCityRequest {
+public class PlaylistSuggestionCityRequest {
     private String city;
     private String countryCode;
     private String callbackUrl;

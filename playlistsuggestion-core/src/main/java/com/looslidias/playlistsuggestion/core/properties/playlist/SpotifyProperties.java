@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.core.properties.music;
+package com.looslidias.playlistsuggestion.core.properties.playlist;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

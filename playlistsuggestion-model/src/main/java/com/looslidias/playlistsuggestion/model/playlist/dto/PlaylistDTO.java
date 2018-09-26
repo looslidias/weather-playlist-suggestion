@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.music.dto;
+package com.looslidias.playlistsuggestion.model.playlist.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,9 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class MusicDTO implements Serializable {
+public class PlaylistDTO implements Serializable {
     private static final long serialVersionUID = 8579730682205501624L;
 
     private String genre;
     private List<TrackDTO> tracks;
+    private Date updatedAt;
 }

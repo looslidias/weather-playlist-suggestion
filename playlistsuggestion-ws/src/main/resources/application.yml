@@ -5,13 +5,13 @@ weather:
   open-weather:
     city-base-url: http://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&APPID=${appId}&units=imperial
     lat-long-base-url: http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${appId}&units=imperial
-    app-key: ${OPEN_WEATHER_KEY}
+    app-key: a57afda6e2e8c5393857e97345b3d0f0
 
-music:
+playlist:
   spotify:
     search-genre-track-url: https://api.spotify.com/v1/search?q=${genre}&type=track&limit=${limit}
     search-genre-track-limit: 20
-    app-key: ${SPOTIFY_KEY}
+    app-key: asasdasd
 
 suggestion:
   genre-rules-file: drools/genres_rules.drl
@@ -25,6 +25,16 @@ queue:
     playlist-lat-long-suggestion-queue: suggestion-latlong-queue
 
 spring:
+  datasource:
+    password: postgres
+    username: postgres
+    platform: postgres
+    url: jdbc:postgis://localhost:5432/postgres
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   cache.type: redis
   redis:
     host: redis

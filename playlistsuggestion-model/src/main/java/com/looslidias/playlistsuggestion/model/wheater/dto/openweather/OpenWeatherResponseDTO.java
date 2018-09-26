@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.wheater.openweather;
+package com.looslidias.playlistsuggestion.model.wheater.dto.openweather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OpenWeatherResponseDTO {
+    @JsonProperty("name")
+    private String cityName;
+    private OpenWeatherCoordDTO coord;
     @JsonProperty("main")
     private OpenWeatherTemperatureDTO temperature;
+    private OpenWeatherSysDataDTO sys;
 }

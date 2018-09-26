@@ -1,9 +1,7 @@
 package com.looslidias.playlistsuggestion.core.utils;
 
-import com.looslidias.playlistsuggestion.model.playlist.Artist;
 import com.looslidias.playlistsuggestion.model.playlist.Playlist;
 import com.looslidias.playlistsuggestion.model.playlist.Track;
-import com.looslidias.playlistsuggestion.model.playlist.dto.ArtistDTO;
 import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
 import com.looslidias.playlistsuggestion.model.playlist.dto.TrackDTO;
 import com.looslidias.playlistsuggestion.model.playlist.dto.spotify.SpotifyArtistDTO;
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18
  */
-public final class MusicUtils {
+public final class PlaylistUtils {
 
     public static Playlist buildPlaylist(final String genre, final SpotifyResponseDTO response) {
         return Playlist.builder()
@@ -30,21 +28,18 @@ public final class MusicUtils {
                 .name(item.getName())
                 .url(item.getExternalUrl().getUrl())
                 .popularity(item.getPopularity())
-                .artists(buildArtists(item.getArtists()))
+                .artists(item.getArtists().stream().map(SpotifyArtistDTO::getName).collect(Collectors.toList()))
                 .build()).collect(Collectors.toList());
     }
 
-    private static List<Artist> buildArtists(final List<SpotifyArtistDTO> artists) {
-        return artists.stream().map(artist -> Artist.builder()
-                .name(artist.getName())
-                .url(artist.getExternalUrl().getUrl())
-                .build()).collect(Collectors.toList());
-    }
-
-    private static PlaylistDTO playlistFromModel(final Playlist playlist) {
+    public static PlaylistDTO playlistFromModel(final Playlist playlist) {
+        if (playlist == null) {
+            return null;
+        }
         return PlaylistDTO.builder()
                 .genre(playlist.getGenre())
                 .tracks(tracksFromModel(playlist.getTracks()))
+                .updatedAt(playlist.getUpdatedAt())
                 .build();
     }
 
@@ -53,14 +48,7 @@ public final class MusicUtils {
                 .name(track.getName())
                 .url(track.getUrl())
                 .popularity(track.getPopularity())
-                .artists(artistsFromModel(track.getArtists()))
-                .build()).collect(Collectors.toList());
-    }
-
-    private static List<ArtistDTO> artistsFromModel(List<Artist> artists) {
-        return artists.stream().map(artist -> ArtistDTO.builder()
-                .name(artist.getName())
-                .url(artist.getUrl())
+                .artists(track.getArtists())
                 .build()).collect(Collectors.toList());
     }
 

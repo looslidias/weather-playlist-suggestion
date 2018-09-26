@@ -18,22 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class MusicController {
+public class PlaylistController {
 
     @Autowired
     private PlaylistService playlistService;
 
-    @RequestMapping(value = PlaylistURLMapping.GENRE_TRACKS_ENDPOINT, method = RequestMethod.GET)
-    public ResponseEntity getGenreTracks(@PathVariable("genre") String genre) {
+    @RequestMapping(value = PlaylistURLMapping.TRACKS_GENRE_ENDPOINT, method = RequestMethod.GET)
+    public ResponseEntity getTracks(@PathVariable("genre") String genre) {
         try {
             PlaylistDTO response = playlistService.searchGenreTracks(genre);
-            log.info("Successfully processed Genre Tracks request. Genre: {}", genre);
+            if (response == null) {
+                String message = "Could not find any tracks for genre: " + genre;
+                log.warn(message);
+                return ResponseEntity.status(HttpStatus.ACCEPTED).contentType(MediaType.TEXT_PLAIN).body(message + ". Please try again later");
+            }
+            log.info("Successfully processed Tracks request. Genre: {}", genre);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
         } catch (IllegalArgumentException e) {
-            log.error("Bad request for Genre Tracks. Genre: {}", genre, e);
+            log.error("Bad request for Tracks. Genre: {}", genre, e);
             return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
         } catch (Exception e) {
-            log.error("Error while processing request for Genre Tracks. Genre: {}", genre, e);
+            log.error("Error while processing request for Tracks. Genre: {}", genre, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
         }
     }

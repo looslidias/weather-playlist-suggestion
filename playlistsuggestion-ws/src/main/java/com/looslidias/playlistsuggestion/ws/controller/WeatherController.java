@@ -1,14 +1,13 @@
 package com.looslidias.playlistsuggestion.ws.controller;
 
 import com.looslidias.playlistsuggestion.core.service.weather.WeatherService;
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
 import com.looslidias.playlistsuggestion.ws.controller.mapping.WeatherURLMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

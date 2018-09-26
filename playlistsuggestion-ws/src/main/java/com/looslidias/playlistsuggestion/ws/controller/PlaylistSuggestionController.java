@@ -1,16 +1,15 @@
 package com.looslidias.playlistsuggestion.ws.controller;
 
-import com.looslidias.playlistsuggestion.core.service.playlist.PlaylistSuggestionService;
-import com.looslidias.playlistsuggestion.model.playlist.PlaylistCityRequest;
-import com.looslidias.playlistsuggestion.model.playlist.PlaylistLatLongRequest;
-import com.looslidias.playlistsuggestion.model.playlist.PlaylistSuggestionDTO;
+import com.looslidias.playlistsuggestion.core.service.suggestion.PlaylistSuggestionService;
+import com.looslidias.playlistsuggestion.model.suggestion.PlaylistSuggestionCityRequest;
+import com.looslidias.playlistsuggestion.model.suggestion.PlaylistSuggestionDTO;
+import com.looslidias.playlistsuggestion.model.suggestion.PlaylistSuggestionLatLongRequest;
 import com.looslidias.playlistsuggestion.ws.controller.mapping.PlaylistSuggestionMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +25,8 @@ public class PlaylistSuggestionController {
     @Autowired
     private PlaylistSuggestionService playlistSuggestionService;
 
-    @Cacheable(value = "playlist-city", key = "{#city, #countryCode}")
     @RequestMapping(value = PlaylistSuggestionMapping.PLAYLIST_CITY_ENDPOINT, method = RequestMethod.GET)
-    @ApiOperation(value = "Get weather playlist suggestion regarding city input synchronously", nickname = "Get weather playlist suggestion regarding city input synchronously")
+    @ApiOperation(value = "Get weather suggestion suggestion regarding city input synchronously", nickname = "Get weather suggestion suggestion regarding city input synchronously")
     @ApiResponses(value =
             {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 400, message = "Bad Request"),
                     @ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Internal Server Error")})
@@ -46,9 +44,8 @@ public class PlaylistSuggestionController {
         }
     }
 
-    @Cacheable(value = "playlist-lat-long", key = "{#lat, #lon}")
     @RequestMapping(value = PlaylistSuggestionMapping.PLAYLIST_LAT_LONG_ENDPOINT, method = RequestMethod.GET)
-    @ApiOperation(value = "Get weather playlist suggestion regarding latitude/longitude input synchronously", nickname = "Get weather playlist suggestion regarding city input synchronously")
+    @ApiOperation(value = "Get weather suggestion suggestion regarding latitude/longitude input synchronously", nickname = "Get weather suggestion suggestion regarding city input synchronously")
     @ApiResponses(value =
             {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 400, message = "Bad Request"),
                     @ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Internal Server Error")})
@@ -67,11 +64,11 @@ public class PlaylistSuggestionController {
     }
 
     @RequestMapping(value = PlaylistSuggestionMapping.PLAYLIST_CITY_ENDPOINT_ASYNC, method = RequestMethod.POST)
-    @ApiOperation(value = "POST weather playlist suggestion request regarding city", nickname = "POST weather playlist suggestion regarding city")
+    @ApiOperation(value = "POST weather suggestion suggestion request regarding city", nickname = "POST weather suggestion suggestion regarding city")
     @ApiResponses(value =
             {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 400, message = "Bad Request"),
                     @ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Internal Server Error")})
-    public ResponseEntity postCityPlaylistRequest(@RequestBody PlaylistCityRequest request) {
+    public ResponseEntity postCityPlaylistRequest(@RequestBody PlaylistSuggestionCityRequest request) {
         try {
             playlistSuggestionService.schedulePlaylistByCity(request);
             log.info("Successfully processed asynchronous City Playlist Suggestion request: {}", request);
@@ -86,11 +83,11 @@ public class PlaylistSuggestionController {
     }
 
     @RequestMapping(value = PlaylistSuggestionMapping.PLAYLIST_LAT_LONG_ENDPOINT_ASYNC, method = RequestMethod.POST)
-    @ApiOperation(value = "POST weather playlist suggestion request regarding latitude/longitude", nickname = "Get weather playlist suggestion regarding city input asynchronously")
+    @ApiOperation(value = "POST weather suggestion suggestion request regarding latitude/longitude", nickname = "Get weather suggestion suggestion regarding city input asynchronously")
     @ApiResponses(value =
             {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 400, message = "Bad Request"),
                     @ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Internal Server Error")})
-    public ResponseEntity postLatLongPlaylistRequest(@RequestBody PlaylistLatLongRequest request) {
+    public ResponseEntity postLatLongPlaylistRequest(@RequestBody PlaylistSuggestionLatLongRequest request) {
         try {
             playlistSuggestionService.schedulePlaylistByLatLong(request);
             log.info("Successfully processed asynchronous LatLong Playlist Suggestion request: {}", request);

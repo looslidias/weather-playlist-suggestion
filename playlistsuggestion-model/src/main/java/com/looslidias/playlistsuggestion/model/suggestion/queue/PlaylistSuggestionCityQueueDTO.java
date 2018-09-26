@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.queue;
+package com.looslidias.playlistsuggestion.model.suggestion.queue;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

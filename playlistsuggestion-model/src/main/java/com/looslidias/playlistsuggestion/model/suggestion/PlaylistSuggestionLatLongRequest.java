@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.playlist;
+package com.looslidias.playlistsuggestion.model.suggestion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class PlaylistLatLongRequest {
+public class PlaylistSuggestionLatLongRequest {
     private Double lat;
     private Double lon;
     private String callbackUrl;

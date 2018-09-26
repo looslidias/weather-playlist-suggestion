@@ -12,9 +12,11 @@ services:
     depends_on:
       - activemq
       - redis
+      - postgis
     links:
       - activemq
       - redis
+      - postgis
     networks:
       - playlistsuggestion-net
   playlistsuggestion-worker:
@@ -29,9 +31,11 @@ services:
     depends_on:
       - activemq
       - redis
+      - postgis
     links:
       - activemq
       - redis
+      - postgis
     networks:
       - playlistsuggestion-net
   activemq:
@@ -49,7 +53,14 @@ services:
     ports:
       - 6379:6379 
     networks:
-      - playlistsuggestion-net                      
+      - playlistsuggestion-net
+  postgis:
+    image: mdillon/postgis:latest
+    container_name: playlistsuggestion-postgis
+    ports:
+      - 5432:5432
+    networks:
+      - playlistsuggestion-net
 networks:
   playlistsuggestion-net:
     driver: bridge

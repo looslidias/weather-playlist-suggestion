@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class DroolsService implements PlaylistGenreService {
+public class DroolsSuggestionService implements SuggestionGenreService {
 
     private static final String GENRES_GLOBAL = "genres";
     private KnowledgeBase knowledgeBase;
@@ -41,7 +41,7 @@ public class DroolsService implements PlaylistGenreService {
 
         if (errors.size() > 0) {
             for (KnowledgeBuilderError error : errors) {
-                log.error("DroolsService [Knowledge parsing error] {}", error);
+                log.error("DroolsSuggestionService [Knowledge parsing error] {}", error);
             }
             throw new IllegalArgumentException("Could not parse drools knowledge.");
         }

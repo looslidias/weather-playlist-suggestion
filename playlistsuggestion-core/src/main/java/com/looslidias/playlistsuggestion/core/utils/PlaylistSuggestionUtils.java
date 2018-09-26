@@ -1,8 +1,8 @@
 package com.looslidias.playlistsuggestion.core.utils;
 
-import com.looslidias.playlistsuggestion.model.playlist.PlaylistSuggestionDTO;
-import com.looslidias.playlistsuggestion.model.music.MusicDTO;
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.suggestion.PlaylistSuggestionDTO;
+import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public final class PlaylistSuggestionUtils {
     private PlaylistSuggestionUtils() {
     }
 
-    public static PlaylistSuggestionDTO buildPlaylistSuggestionResponse(final WeatherDTO weatherDTO, final List<MusicDTO> playlists) {
+    public static PlaylistSuggestionDTO buildPlaylistSuggestionResponse(final WeatherDTO weatherDTO, final List<PlaylistDTO> playlists) {
         return PlaylistSuggestionDTO.builder()
                 .weather(weatherDTO)
                 .playlists(playlists)

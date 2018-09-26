@@ -1,8 +1,8 @@
 package com.looslidias.playlistsuggestion.worker.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.looslidias.playlistsuggestion.core.service.playlist.PlaylistSuggestionService;
-import com.looslidias.playlistsuggestion.model.queue.PlaylistCitySuggestionQueueDTO;
+import com.looslidias.playlistsuggestion.core.service.suggestion.PlaylistSuggestionService;
+import com.looslidias.playlistsuggestion.model.suggestion.queue.PlaylistSuggestionCityQueueDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
@@ -25,10 +25,10 @@ public class PlaylistCitySuggestionListener {
     @JmsListener(destination = "${queue.activemq.playlist-city-suggestion-queue}")
     public void onMessage(String message) {
         try {
-            PlaylistCitySuggestionQueueDTO dto = objectMapper.readValue(message, PlaylistCitySuggestionQueueDTO.class);
+            PlaylistSuggestionCityQueueDTO dto = objectMapper.readValue(message, PlaylistSuggestionCityQueueDTO.class);
             playlistSuggestionService.processPlaylistByCity(dto);
         } catch (Exception ex) {
-            log.error("Could not process PlaylistCitySuggestionQueueDTO. Message: {}", message, ex);
+            log.error("Could not process PlaylistSuggestionCityQueueDTO. Message: {}", message, ex);
         }
     }
 }

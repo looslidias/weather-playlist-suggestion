@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 23/09/18
  */
-public interface PlaylistGenreService {
+public interface SuggestionGenreService {
 
     /**
-     * Searches suggestion genres according to given {@code weather}.
+     * Searches genres according to given {@code weather}.
      * @param weather Analysed {@link WeatherDTO}.
      * @return A List of playlsist genres
      */

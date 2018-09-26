@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Date;
-import com.looslidias.playlistsuggestion.model.wheater.WeatherDTO;
-import com.looslidias.playlistsuggestion.model.wheater.TemperatureDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
+import com.looslidias.playlistsuggestion.model.wheater.dto.TemperatureDTO;
 import com.google.common.collect.Lists;
 
 // Global variables

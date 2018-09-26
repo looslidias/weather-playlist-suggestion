@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.wheater;
+package com.looslidias.playlistsuggestion.model.wheater.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

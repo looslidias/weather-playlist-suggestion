@@ -1,6 +1,6 @@
-package com.looslidias.playlistsuggestion.model.playlist;
+package com.looslidias.playlistsuggestion.model.suggestion;
 
-import com.looslidias.playlistsuggestion.model.music.dto.MusicDTO;
+import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +20,5 @@ import java.util.List;
 public class PlaylistSuggestionDTO implements Serializable {
     private static final long serialVersionUID = -7748235646550667481L;
     private WeatherDTO weather;
-    private List<MusicDTO> playlists;
+    private List<PlaylistDTO> playlists;
 }

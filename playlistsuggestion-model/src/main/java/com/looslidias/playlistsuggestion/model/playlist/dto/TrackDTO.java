@@ -1,4 +1,4 @@
-package com.looslidias.playlistsuggestion.model.music.dto;
+package com.looslidias.playlistsuggestion.model.playlist.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +20,5 @@ public class TrackDTO implements Serializable {
     private String name;
     private String url;
     private Float popularity;
-    private List<ArtistDTO> artists;
+    private List<String> artists;
 }

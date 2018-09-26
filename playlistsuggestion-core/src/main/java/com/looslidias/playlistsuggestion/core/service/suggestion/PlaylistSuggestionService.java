@@ -1,12 +1,12 @@
-package com.looslidias.playlistsuggestion.core.service.playlist;
+package com.looslidias.playlistsuggestion.core.service.suggestion;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.looslidias.playlistsuggestion.core.properties.queue.ActiveMQProperties;
 import com.looslidias.playlistsuggestion.core.service.callback.CallbackService;
-import com.looslidias.playlistsuggestion.core.service.music.MusicService;
-import com.looslidias.playlistsuggestion.core.service.playlist.genre.PlaylistGenreService;
+import com.looslidias.playlistsuggestion.core.service.playlist.PlaylistService;
+import com.looslidias.playlistsuggestion.core.service.suggestion.genre.SuggestionGenreService;
 import com.looslidias.playlistsuggestion.core.service.weather.WeatherService;
 import com.looslidias.playlistsuggestion.core.utils.CallbackUtils;
 import com.looslidias.playlistsuggestion.core.utils.PlaylistSuggestionUtils;
@@ -21,6 +21,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -30,18 +31,18 @@ import java.util.stream.Collectors;
 public class PlaylistSuggestionService {
 
     private WeatherService weatherService;
-    private MusicService musicService;
-    private PlaylistGenreService playlistGenreService;
+    private PlaylistService playlistService;
+    private SuggestionGenreService suggestionGenreService;
     private CallbackService callbackService;
     private JmsTemplate jmsTemplate;
     private ActiveMQProperties activeMQProperties;
     private ObjectMapper objectMapper;
 
-    public PlaylistSuggestionService(WeatherService weatherService, MusicService musicService, PlaylistGenreService playlistGenreService,
+    public PlaylistSuggestionService(WeatherService weatherService, PlaylistService playlistService, SuggestionGenreService suggestionGenreService,
                                      CallbackService callbackService, JmsTemplate jmsTemplate, ActiveMQProperties activeMQProperties, ObjectMapper objectMapper) {
         this.weatherService = weatherService;
-        this.musicService = musicService;
-        this.playlistGenreService = playlistGenreService;
+        this.playlistService = playlistService;
+        this.suggestionGenreService = suggestionGenreService;
         this.jmsTemplate = jmsTemplate;
         this.callbackService = callbackService;
         this.activeMQProperties = activeMQProperties;
@@ -53,8 +54,8 @@ public class PlaylistSuggestionService {
         Preconditions.checkArgument(countryCode != null, "CountryCode must be specified");
 
         WeatherDTO weatherDTO = weatherService.searchWeather(city, countryCode);
-        List<String> genres = playlistGenreService.searchGenres(weatherDTO);
-        List<PlaylistDTO> playlists = genres.stream().map(genre -> musicService.searchGenreTracks(genre)).collect(Collectors.toList());
+        List<String> genres = suggestionGenreService.searchGenres(weatherDTO);
+        List<PlaylistDTO> playlists = genres.stream().map(genre -> playlistService.searchGenreTracks(genre)).filter(Objects::nonNull).collect(Collectors.toList());
         return PlaylistSuggestionUtils.buildPlaylistSuggestionResponse(weatherDTO, playlists);
     }
 
@@ -63,8 +64,8 @@ public class PlaylistSuggestionService {
         Preconditions.checkArgument(lon != null, "Longitude must be specified");
 
         WeatherDTO weatherDTO = weatherService.searchWeather(lat, lon);
-        List<String> genres = playlistGenreService.searchGenres(weatherDTO);
-        List<PlaylistDTO> playlists = genres.stream().map(genre -> musicService.searchGenreTracks(genre)).collect(Collectors.toList());
+        List<String> genres = suggestionGenreService.searchGenres(weatherDTO);
+        List<PlaylistDTO> playlists = genres.stream().map(genre -> playlistService.searchGenreTracks(genre)).filter(Objects::nonNull).collect(Collectors.toList());
         return PlaylistSuggestionUtils.buildPlaylistSuggestionResponse(weatherDTO, playlists);
     }
 
@@ -91,9 +92,9 @@ public class PlaylistSuggestionService {
     public void processPlaylistByCity(final PlaylistSuggestionCityQueueDTO queueDTO) {
         long startTime = System.currentTimeMillis();
         WeatherDTO weatherDTO = weatherService.searchWeather(queueDTO.getCity(), queueDTO.getCountryCode());
-        List<String> genres = playlistGenreService.searchGenres(weatherDTO);
+        List<String> genres = suggestionGenreService.searchGenres(weatherDTO);
 
-        List<PlaylistDTO> playlists = genres.stream().map(genre -> musicService.searchGenreTracks(genre)).collect(Collectors.toList());
+        List<PlaylistDTO> playlists = genres.stream().map(genre -> playlistService.searchGenreTracks(genre)).filter(Objects::nonNull).collect(Collectors.toList());
         PlaylistSuggestionDTO response = PlaylistSuggestionUtils.buildPlaylistSuggestionResponse(weatherDTO, playlists);
         long endTime = System.currentTimeMillis();
 
@@ -103,9 +104,9 @@ public class PlaylistSuggestionService {
     public void processPlaylistByLatLong(final PlaylistSuggestionLatLongQueueDTO queueDTO) {
         long startTime = System.currentTimeMillis();
         WeatherDTO weatherDTO = weatherService.searchWeather(queueDTO.getLat(), queueDTO.getLon());
-        List<String> genres = playlistGenreService.searchGenres(weatherDTO);
+        List<String> genres = suggestionGenreService.searchGenres(weatherDTO);
 
-        List<PlaylistDTO> playlists = genres.stream().map(genre -> musicService.searchGenreTracks(genre)).collect(Collectors.toList());
+        List<PlaylistDTO> playlists = genres.stream().map(genre -> playlistService.searchGenreTracks(genre)).filter(Objects::nonNull).collect(Collectors.toList());
         PlaylistSuggestionDTO response = PlaylistSuggestionUtils.buildPlaylistSuggestionResponse(weatherDTO, playlists);
         long endTime = System.currentTimeMillis();
 
