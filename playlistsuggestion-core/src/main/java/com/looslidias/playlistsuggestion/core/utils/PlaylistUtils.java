@@ -9,6 +9,10 @@ import com.looslidias.playlistsuggestion.model.playlist.dto.spotify.SpotifyRespo
 import com.looslidias.playlistsuggestion.model.playlist.dto.spotify.SpotifyTrackItemDTO;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +28,7 @@ public final class PlaylistUtils {
     }
 
     private static List<Track> buildTracks(final List<SpotifyTrackItemDTO> items) {
-        return items.stream().map(item -> Track.builder()
+        return items.stream().filter(distinctByKey(SpotifyTrackItemDTO::getName)).map(item -> Track.builder()
                 .name(item.getName())
                 .url(item.getExternalUrl().getUrl())
                 .popularity(item.getPopularity())
@@ -52,4 +56,8 @@ public final class PlaylistUtils {
                 .build()).collect(Collectors.toList());
     }
 
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
+    }
 }

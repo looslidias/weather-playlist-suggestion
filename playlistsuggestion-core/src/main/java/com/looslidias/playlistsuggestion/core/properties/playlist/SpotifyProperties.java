@@ -11,5 +11,7 @@ import lombok.NoArgsConstructor;
 public class SpotifyProperties {
     private String searchGenreTrackUrl;
     private Integer searchGenreTrackLimit;
-    private String appKey;
+    private String credentialsUrl;
+    private String clientId;
+    private String clientSecret;
 }

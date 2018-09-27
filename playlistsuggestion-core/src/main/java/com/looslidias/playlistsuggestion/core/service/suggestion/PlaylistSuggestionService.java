@@ -17,6 +17,7 @@ import com.looslidias.playlistsuggestion.model.suggestion.PlaylistSuggestionDTO;
 import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
 import com.looslidias.playlistsuggestion.model.suggestion.queue.PlaylistSuggestionLatLongQueueDTO;
 import com.looslidias.playlistsuggestion.model.wheater.dto.WeatherDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,7 @@ public class PlaylistSuggestionService {
     private ActiveMQProperties activeMQProperties;
     private ObjectMapper objectMapper;
 
+    @Autowired
     public PlaylistSuggestionService(WeatherService weatherService, PlaylistService playlistService, SuggestionGenreService suggestionGenreService,
                                      CallbackService callbackService, JmsTemplate jmsTemplate, ActiveMQProperties activeMQProperties, ObjectMapper objectMapper) {
         this.weatherService = weatherService;

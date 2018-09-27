@@ -8,6 +8,7 @@ import com.looslidias.playlistsuggestion.model.playlist.dao.PlaylistRepository;
 import com.looslidias.playlistsuggestion.model.playlist.dto.PlaylistDTO;
 import com.looslidias.playlistsuggestion.model.playlist.dto.spotify.SpotifyResponseDTO;
 import org.apache.commons.text.StrSubstitutor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,15 @@ public class SpotifyPlaylistService implements PlaylistService {
 
     private PlaylistProperties playlistProperties;
     private PlaylistRepository playlistRepository;
+    private SpotifyCredentialsService spotifyCredentialsService;
     private RestTemplate restTemplate;
 
-    public SpotifyPlaylistService(PlaylistProperties playlistProperties, PlaylistRepository playlistRepository) {
+    @Autowired
+    public SpotifyPlaylistService(PlaylistProperties playlistProperties, PlaylistRepository playlistRepository,
+                                  SpotifyCredentialsService spotifyCredentialsService) {
         this.playlistProperties = playlistProperties;
         this.playlistRepository = playlistRepository;
+        this.spotifyCredentialsService = spotifyCredentialsService;
         this.restTemplate = new RestTemplate();
     }
 
@@ -59,7 +64,7 @@ public class SpotifyPlaylistService implements PlaylistService {
 
     private HttpHeaders buildRequestHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + playlistProperties.getSpotify().getAppKey());
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + spotifyCredentialsService.getAccessToken());
         return headers;
     }
 

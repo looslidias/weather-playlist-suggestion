@@ -15,20 +15,18 @@ import java.util.List;
  * @author Created by Rafael Loosli Dias (rafaldias@gmail.com) on 25/09/18
  */
 @Entity
-@Table(name = "playlist", indexes = {@Index(name = "playlist_genre_idx",  columnList="genre", unique = true)})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Playlist {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
-    @Column
+    @Column(name = "playlist_genre")
     private String genre;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playlist_id")
+    @JoinColumn(name = "playlist_genre")
     private List<Track> tracks;
 
     @Column(name = "created_at")

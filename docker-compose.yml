@@ -2,9 +2,10 @@ version: "2.0"
 services:
   playlistsuggestion-ws:
     build: ./playlistsuggestion-ws
-    #environment:
-    #  - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/db_star_wars
-    #container_name: playlistsuggestion-ws
+    environment:
+      - OPEN_WEATHER_KEY=<YOUR_OPEN_WEATHER_KEY>
+      - SPOTIFY_ID=<YOUR_SPOTIFY_CLIENT_ID>
+      - SPOTIFY_SECRET=<YOUR_SPOTIFY_CLIENT_SECRET>
     expose:
       - 8080
     ports:
@@ -21,9 +22,10 @@ services:
       - playlistsuggestion-net
   playlistsuggestion-worker:
     build: ./playlistsuggestion-worker
-    #environment:
-    #  - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/db_star_wars
-    #container_name: playlistsuggestion-worker
+    environment:
+      - OPEN_WEATHER_KEY=<YOUR_OPEN_WEATHER_KEY>
+      - SPOTIFY_ID=<YOUR_SPOTIFY_CLIENT_ID>
+      - SPOTIFY_SECRET=<YOUR_SPOTIFY_CLIENT_SECRET>
     expose:
       - 8090
     ports:

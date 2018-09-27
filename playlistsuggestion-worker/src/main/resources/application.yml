@@ -9,9 +9,11 @@ weather:
 
 playlist:
   spotify:
-    search-genre-track-url: https://api.spotify.com/v1/search?q=${genre}&type=track&limit=${limit}
+    search-genre-track-url: https://api.spotify.com/v1/search?q=genre:${genre}&type=track&limit=${limit}
     search-genre-track-limit: 20
-    app-key: ${SPOTIFY_KEY}
+    credentials-url: https://accounts.spotify.com/api/token
+    client-id: ${SPOTIFY_ID}
+    client-secret: ${SPOTIFY_SECRET}
 
 suggestion:
   genre-rules-file: drools/genres_rules.drl
