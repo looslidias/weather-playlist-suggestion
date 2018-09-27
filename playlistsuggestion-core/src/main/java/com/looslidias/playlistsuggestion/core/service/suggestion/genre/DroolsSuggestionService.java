@@ -60,9 +60,9 @@ public class DroolsSuggestionService implements SuggestionGenreService {
         session.insert(weather);
         session.fireAllRules();
 
-        List<String> violations = (List<String>) session.getGlobal(GENRES_GLOBAL);
+        List<String> genres = (List<String>) session.getGlobal(GENRES_GLOBAL);
         session.dispose();
 
-        return violations;
+        return genres;
     }
 }

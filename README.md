@@ -3,7 +3,13 @@
 Service that suggests playlists according to weather information.
 In order to do so, the platform integrates with OpenWeatherMap (https://openweathermap.org) and Spotify (https://www.spotify.com).
 
-## Running the application on development environment
+## Technologies
+
+In this project, the followign technologies were used: Java, Spring/SpringBoot, Drools, Redis, ActiveMQ, PostreSQL (Postgis), Docker/Docker Compose.
+
+TODO: The PostgreSQL extension (Postgis) was added as it provides spatial analysis, so, if there are any communication issues with Weather provider (OpenWeather), we could check the nearest reference/location according to the requested latitude / longitude.
+
+## Running application under development environment
 
 In order to make it easier to run the application under development environment, docker and docker-compose technologies were applied.
 
@@ -19,7 +25,7 @@ After this, you are ready to start! Just follow the steps to build and run the a
 * `docker-compose build`: This command will build all application container images;
 * `docker-compose up`: This command will start all resources needed for Weather Playlist Suggestion application (playlistsuggestion-ws, playlistsuggestion-worker, activemq, redis and postgis)
 
-## Testing the application on development environment
+## Testing application under development environment
 
 In order to make it easier to test the application under development environment, we have added Swagger UI (https://swagger.io), which allows to visualize and interact with Weather Playlist Suggestion API’s without any other tool.
 
